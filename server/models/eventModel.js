@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const EventSchema = new Schema({
+    admin_id:{
+        type: Schema.Types.ObjectId,
+        ref: 'Admin'
+    },
     title:{
         type:String,
         required:true
