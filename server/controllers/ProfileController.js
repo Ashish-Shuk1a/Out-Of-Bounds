@@ -5,14 +5,12 @@ const createProfile = async (req, res) => {
         const name = req.body.name
         const email = req.body.email
         const number = req.body.number
-        const age = req.body.age
         const area_of_interest = req.body.area_of_interest != null ? req.body.area_of_interest : []
         const prior_exp = req.body.prior_exp != null ? req.body.prior_exp : []
         const user = new User({
             name: name,
             email: email,
             number: number,
-            age: age,
             area_of_interest: area_of_interest,
             prior_exp: prior_exp
         })
@@ -30,7 +28,6 @@ const createProfile = async (req, res) => {
         })
     }
 }
-
 
 module.exports ={
     createProfile

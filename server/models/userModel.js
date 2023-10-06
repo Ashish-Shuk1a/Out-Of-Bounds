@@ -6,10 +6,6 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
-    age:{
-        type:Number,
-        required:true
-    },
     number:{
         type: String,
         minLenth:10, 
@@ -20,7 +16,6 @@ const UserSchema = new Schema({
     },
     email:{
         type:String,
-        required:true,
         trim:true,
         unique:true
     },
@@ -37,7 +32,14 @@ const UserSchema = new Schema({
         date:{
             type:String
         }
-    }]
+    }],
+    image:{
+        type:String
+    },
+    stars:{
+        type:Number,
+        default:0
+    }
 },{timestamps:true})
 
 module.exports = mongoose.model('User',UserSchema)
