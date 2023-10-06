@@ -14,9 +14,23 @@ const EventSchema = new Schema({
         type:String,
         required:true
     },
-    location:{
+    scope:{
         type:String,
         required:true
+    },
+    location:{
+        region:{
+            type:String
+        },
+        city:{
+            type:String
+        },
+        state:{
+            type:String
+        },
+        country:{
+            type:String
+        }
     },
     req_volunteers:{
         type:Number,

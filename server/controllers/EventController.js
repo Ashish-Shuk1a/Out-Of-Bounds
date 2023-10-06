@@ -35,7 +35,7 @@ const createEvent = async (req, res) => {
     })
 }
 
-const recommendEvent = async (req, res) => {
+const recommendEvent_Region = async (req, res) => {
     try {
         const id = req.params.id
         const user = await User.findById(id)
@@ -44,13 +44,141 @@ const recommendEvent = async (req, res) => {
             for (let interest of user.area_of_interest) {
                 const event = await Event.find({
                     type: interest,
-                    location: user.location
+                    'location.region':user.location.region
                 });
                 events = events.concat(event);
             }
             return res.status(200).json({
                 "status": "success",
-                "message": "Events fetched successfully",
+                "message": "Regional Events fetched successfully",
+                "data": events
+            })
+        } catch (error) {
+            return res.status(400).json({
+                "status": "error",
+                "error": error.message
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal server error",
+            "error": error.message
+        })
+    }
+}
+
+const recommendEvent_City = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id)
+        try {
+            let events = [];
+            for (let interest of user.area_of_interest) {
+                const event = await Event.find({
+                    type: interest,
+                    'location.city':user.location.city
+                });
+                events = events.concat(event);
+            }
+            return res.status(200).json({
+                "status": "success",
+                "message": "City Events fetched successfully",
+                "data": events
+            })
+        } catch (error) {
+            return res.status(400).json({
+                "status": "error",
+                "error": error.message
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal server error",
+            "error": error.message
+        })
+    }
+}
+const recommendEvent_State = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id)
+        try {
+            let events = [];
+            for (let interest of user.area_of_interest) {
+                const event = await Event.find({
+                    type: interest,
+                    'location.state':user.location.state
+                });
+                events = events.concat(event);
+            }
+            return res.status(200).json({
+                "status": "success",
+                "message": "State Events fetched successfully",
+                "data": events
+            })
+        } catch (error) {
+            return res.status(400).json({
+                "status": "error",
+                "error": error.message
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal server error",
+            "error": error.message
+        })
+    }
+}
+const recommendEvent_Country = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id)
+        try {
+            let events = [];
+            for (let interest of user.area_of_interest) {
+                const event = await Event.find({
+                    type: interest,
+                    'location.country':user.location.country
+                });
+                events = events.concat(event);
+            }
+            return res.status(200).json({
+                "status": "success",
+                "message": "Country Events fetched successfully",
+                "data": events
+            })
+        } catch (error) {
+            return res.status(400).json({
+                "status": "error",
+                "error": error.message
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal server error",
+            "error": error.message
+        })
+    }
+}
+const recommendEvent_Global = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findById(id)
+        try {
+            let events = [];
+            for (let interest of user.area_of_interest) {
+                const event = await Event.find({
+                    type: interest,
+                });
+                events = events.concat(event);
+            }
+            return res.status(200).json({
+                "status": "success",
+                "message": "Global Events fetched successfully",
                 "data": events
             })
         } catch (error) {
@@ -70,5 +198,9 @@ const recommendEvent = async (req, res) => {
 
 module.exports = {
     createEvent,
-    recommendEvent
+    recommendEvent_Region,
+    recommendEvent_City,
+    recommendEvent_State,
+    recommendEvent_Country,
+    recommendEvent_Global
 }
