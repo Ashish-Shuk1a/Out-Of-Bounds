@@ -20,8 +20,18 @@ const UserSchema = new Schema({
         unique: true
     },
     location:{
-        type: String,
-        required: true
+        region:{
+            type:String
+        },
+        city:{
+            type:String
+        },
+        state:{
+            type:String
+        },
+        country:{
+            type:String
+        }
     },
     area_of_interest: [{
         type: String
