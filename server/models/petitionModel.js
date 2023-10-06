@@ -2,9 +2,27 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PetitionSchema = new Schema({
+    admin_id:{
+        type: Schema.Types.ObjectId,
+        ref: 'Admin'
+    },
     scope:{
         type:String,
         required:true
+    },
+    location:{
+        region:{
+            type:String
+        },
+        city:{
+            type:String
+        },
+        state:{
+            type:String
+        },
+        country:{
+            type:String
+        }
     },
     topic:{
         type:String,
@@ -18,8 +36,9 @@ const PetitionSchema = new Schema({
         type:String,
         required:true
     },
-    image:{
-        type:String
+    image: {
+        data: Buffer, // Store image data as a buffer
+        contentType: String,
     },
     updates:{
         type:String,
