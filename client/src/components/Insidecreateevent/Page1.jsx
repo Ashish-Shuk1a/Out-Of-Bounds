@@ -123,15 +123,15 @@ const Page1 = ({ setNext, next, eventData, setEventData }) => {
           </div>
         </div>
       </div>
-          <div class="md:w-64 md:ml-12 md:mt-0 mt-4">
+          <div class=" md:mt-0 mt-4">
               <label class="text-sm leading-none text-gray-800" id="lastName">
                 Event Description
               </label>
               <textarea
                 tabindex="0"
-                class="w-[200%] p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
+                class=" p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
                 aria-labelledby="lastName"
-                rows="50" cols="60"
+                rows="20" cols="120"
                 placeholder="The event aim at.."
                 name="description"
                 onChange={handleChange}
@@ -142,12 +142,13 @@ const Page1 = ({ setNext, next, eventData, setEventData }) => {
               <p>
                 <input
                   type="text" className="border border-black outline-none"
+                  placeholder="Enter prompt..."
                   onChange={(e) => setPrompt(e.target.value)}
                 />
               </p>
               <div
                 type="btn"
-                className="green_gradient font-bold cursor-pointer"
+                className="green_gradient font-bold py-3 cursor-pointer"
                 onClick={getOutputChatgpt}
               >
                 {loading ? "Run Chatgpt..." : "Run Chatgpt"}
