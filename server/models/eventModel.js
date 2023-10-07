@@ -30,6 +30,9 @@ const EventSchema = new Schema({
         },
         country:{
             type:String
+        },
+        zip_code:{
+            type:String
         }
     },
     req_volunteers:{
@@ -59,14 +62,27 @@ const EventSchema = new Schema({
     image:{
         type:String
     },
-    questions:[{
-        question:{
-            type:String
+    video:{
+        type:String
+    },
+    open:{
+        type:Boolean,
+        required:true
+    },
+    res_req:{
+        type:Boolean,
+        required:true
+    },
+    response:{
+        clip_req:{
+            type:Boolean,
+            default:false
         },
-        answer:{
+        questions:[{
             type:String
-        }
-    }],
+        }],
+    },
+    
 },{timestamps:true})
 
 module.exports = mongoose.model('Event',EventSchema)
