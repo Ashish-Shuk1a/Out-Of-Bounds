@@ -63,10 +63,22 @@ const changeEvent = async(req,res)=>{
     })
 }
 
+const changeInterest = async(req,res)=>{
+    const user = await User.updateMany({},{area_of_interest:["Education","Health"]},{new:true})
+    const events = await Event.updateMany({},{type:"Education"},{new:true})
+    const petitions = await Petition.updateMany({},{topic:"Education"},{new:true})
+    return res.status(200).json({
+        "status": "success",
+        "message": "Interest updated successfully",
+        "data": user,events,petitions
+    })
+}
+
 module.exports = {
     editLocation,
     addEventScope,
     addAbout,
     addZipCode,
-    changeEvent
+    changeEvent,
+    changeInterest
 }
