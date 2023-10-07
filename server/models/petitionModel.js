@@ -39,6 +39,14 @@ const PetitionSchema = new Schema({
         type:String,
         required:true
     },
+    goal:{
+        type:Number,
+        required:true
+    },
+    raised:{
+        type:Number,
+        default:0
+    },
     image: {
         data: Buffer, // Store image data as a buffer
         contentType: String,

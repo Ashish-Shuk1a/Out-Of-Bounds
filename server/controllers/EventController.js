@@ -225,6 +225,8 @@ const userEventParticipation = async (req, res) => {
                     status: "accepted"
                 })
                 await eventParticipant.save();
+                event.curr_volunteers += 1
+                await event.save()
 
                 return res.status(200).json({
                     "status": "success",
@@ -317,6 +319,48 @@ const adminEventParticipants = async (req, res) => {
         "message": "Event participants fetched successfully",
         "data": participants
     })
+}
+
+const adminParticipantsApproval = async (req, res) => {
+    try {
+        const adminId = req.params.id
+        const eventId = req.body.event_id
+        const userId = req.body.user_id
+        const status = req.body.status
+        try {
+            if (status == "rejected") {
+                const participants = await EventParticipants.find({ admin_id: adminId, event_id: eventId, participant_id: userId })
+                participants.status = "rejected"
+                await participants.save()
+                return res.status(200).json({
+                    "status": "success",
+                    "message": "Participant rejected successfully",
+                    "data": participants
+                })
+            }
+            const participants = await EventParticipants.find({ admin_id: adminId, event_id: eventId, participant_id: userId })
+            const event = await Event.findById(eventId)
+            participants.status = "accepted"
+            await participants.save()
+            event.curr_volunteers += 1
+            return res.status(200).json({
+                "status": "success",
+                "message": "Participant acccepted successfully",
+                "data": participants
+            })
+        } catch (error) {
+            return res.status(400).json({
+                "status": "error",
+                "error": error.message
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal server error",
+            "error": error.message
+        })
+    }
 }
 
 module.exports = {

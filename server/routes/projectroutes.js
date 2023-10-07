@@ -40,11 +40,20 @@ router.post('/admin/:id/event/participants',adminEventParticipants);
 //////////////////////////////////////////////////////////////////
 
 //////////////////////// Petition Management ////////////////////////
-const {createPetition,uploadImage,getFile} = require("../controllers/petitionController")
+const {createPetition,uploadImage,getFile,userPetitionSignature,
+recommendPetition_Region,recommendPetition_City,recommendPetition_State,recommendPetition_Country,recommendPetition_Global} = require("../controllers/petitionController")
 
 router.post('/admin/:id/petition/create',createPetition);
 router.post('/petition/upload/image',uploadImage);
 router.get('/petition/get/file/:id',getFile);
+
+router.post('/user/:id/petition/signature',userPetitionSignature);
+
+router.get('/user/:id/petition/recommend/region',recommendPetition_Region);
+router.get('/user/:id/petition/recommend/city',recommendPetition_City);
+router.get('/user/:id/petition/recommend/state',recommendPetition_State);
+router.get('/user/:id/petition/recommend/country',recommendPetition_Country);
+router.get('/user/:id/petition/recommend/global',recommendPetition_Global);
 
 ////////////////////////////////////////////////////////////////////
 

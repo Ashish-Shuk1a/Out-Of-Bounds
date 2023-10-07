@@ -1,6 +1,7 @@
 const Petition = require("../models/petitionModel")
 const User = require("../models/userModel")
 const File = require("../models/fileModel")
+const PetitionSignature = require("../models/petitionSignatureModel")
 const multer = require('multer'); // For handling multipart/form-data (file upload)
 
 const storage = multer.memoryStorage(); // Store file data in memory
@@ -91,11 +92,11 @@ const createPetition = async (req, res) => {
 
 const uploadImage = async (req, res) => {
     const admin_id = req.params.id;
-        const scope = req.body.scope;
-        const topic = req.body.topic;
-        const title = req.body.title;
-        const story = req.body.story;
-        const updates = req.body.updates != null ? req.body.updates : null;
+    const scope = req.body.scope;
+    const topic = req.body.topic;
+    const title = req.body.title;
+    const story = req.body.story;
+    const updates = req.body.updates != null ? req.body.updates : null;
 
     upload.single('image')(req, res, async (err) => {
         if (err) {
@@ -105,12 +106,12 @@ const uploadImage = async (req, res) => {
         const image = req.file || null;
         const img = new Petition({
             admin_id: admin_id,
-                    scope: scope,
-                    topic: topic,
-                    title: title,
-                    story: story,
-                    image:image.buffer?{data: image.buffer, contentType: image.mimetype}:null,
-                    updates: updates
+            scope: scope,
+            topic: topic,
+            title: title,
+            story: story,
+            image: image.buffer ? { data: image.buffer, contentType: image.mimetype } : null,
+            updates: updates
         });
 
         await img.save();
@@ -307,6 +308,33 @@ const recommendPetition_Global = async (req, res) => {
     }
 }
 
+const userPetitionSignature = async (req, res) => {
+    try {
+        const user_id = req.params.id
+        const petition_id = req.body.petition_id
+        const comment = req.body.comment != null ? req.body.comment : null
+        const petition = await Petition.findById(petition_id)
+        petition.raised += 1
+        const signature = new PetitionSignature({
+            user_id: user_id,
+            petition_id: petition_id,
+            admin_id: petition.admin_id,
+            comment: comment
+        })
+        res.status(200).json({
+            "status": "success",
+            "message": "Petition Signature created successfully",
+            "data": signature
+        })
+    } catch (error) {
+        return res.status(500).json({
+            "status": "error",
+            "message": "Internal Server Error",
+            "error": error.message
+        })
+    }
+}
+
 module.exports = {
     createPetition,
     recommendPetition_Region,
@@ -315,5 +343,6 @@ module.exports = {
     recommendPetition_Country,
     recommendPetition_Global,
     uploadImage,
-    getFile
+    getFile,
+    userPetitionSignature
 }
