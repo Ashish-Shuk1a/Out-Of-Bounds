@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import Maqam from "../../images/shapes/MaqamWhite.png";
 import Atom from "../../images/shapes/atomWhite.png";
 import Globe from "../../images/shapes/globe.png";
 import Typewriter from "typewriter-effect";
 
+import axios from "axios";
+
 const Event = () => {
+  const fetchGlobal = () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "https://hackmania-hackathon.vercel.app/api/user/65202a75ddabc3e433e680d5/event/recommend/global",
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchGlobal();
+  }, []);
+
   return (
     <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">

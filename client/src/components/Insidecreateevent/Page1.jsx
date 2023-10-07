@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Page1 = ({ setNext, next, eventData, setEventData }) => {
   const handleChange = (e) => {
@@ -12,6 +13,46 @@ const Page1 = ({ setNext, next, eventData, setEventData }) => {
   const submits = () => {
     setNext(!next);
   };
+
+  const [output, setOutput] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
+  const [prompt, setPrompt] = useState("");
+
+  const instruction = `you must give suitable output decription for the event it should be descriptive
+ the prompt is ::`;
+
+  const getOutputChatgpt = async () => {
+    const options = {
+      method: "POST",
+      url: "https://chatgpt-api8.p.rapidapi.com/",
+      headers: {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "0af07321d2msh5a41d90d50bd4d8p1440f5jsn2d7f61b772a3",
+        "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
+      },
+      data: [
+        {
+          content: instruction + prompt,
+          role: "user",
+        },
+      ],
+    };
+
+    try {
+      setLoading(true);
+      const response = await axios.request(options);
+      console.log(response.data.text);
+      setOutput(response.data.text);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <div class="mt-16 lg:flex justify-between border-b border-gray-200 pb-16">
@@ -40,23 +81,10 @@ const Page1 = ({ setNext, next, eventData, setEventData }) => {
                 placeholder="Event Name"
                 name="title"
                 onChange={handleChange}
-                value={eventData.title}
+            value={eventData.title}
               />
             </div>
-            <div class="md:w-64 md:ml-12 md:mt-0 mt-4">
-              <label class="text-sm leading-none text-gray-800" id="lastName">
-                Event Description
-              </label>
-              <textarea
-                tabindex="0"
-                class="w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
-                aria-labelledby="lastName"
-                placeholder="The event aim at.."
-                name="description"
-                onChange={handleChange}
-                value={eventData.description}
-              />
-            </div>
+            
           </div>
           <div class="md:flex items-center lg:ml-24 mt-8">
             <div class="md:w-64">
@@ -95,6 +123,36 @@ const Page1 = ({ setNext, next, eventData, setEventData }) => {
           </div>
         </div>
       </div>
+          <div class="md:w-64 md:ml-12 md:mt-0 mt-4">
+              <label class="text-sm leading-none text-gray-800" id="lastName">
+                Event Description
+              </label>
+              <textarea
+                tabindex="0"
+                class="w-[200%] p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"
+                aria-labelledby="lastName"
+                rows="50" cols="60"
+                placeholder="The event aim at.."
+                name="description"
+                onChange={handleChange}
+                value={eventData.description + output}
+              />
+              {/* {output && <p>{output}</p>} */}
+              <p>Use The power of AI</p>
+              <p>
+                <input
+                  type="text" className="border border-black outline-none"
+                  onChange={(e) => setPrompt(e.target.value)}
+                />
+              </p>
+              <div
+                type="btn"
+                className="green_gradient font-bold cursor-pointer"
+                onClick={getOutputChatgpt}
+              >
+                {loading ? "Run Chatgpt..." : "Run Chatgpt"}
+              </div>
+            </div>
       <button
         className="inline-flex sm:ml-10 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
         onClick={submits}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Description from "./About_card/Description";
-import CalendarComponent from "../../Map/CalendarComponent";
+import CalendarComponent from "../../Calender/CalendarComponent";
 // import Events from "./Events";
 // import Member from "./About_card.jsx/Member";
 // import Calendar from "./Calendar";
@@ -123,8 +123,7 @@ const About = () => {
               community! <br /> ~ https://jmt.link/3eSUg9l
             </p>
 
-            
-            <Description/>
+            <Description />
           </div>
         </div>
       </div>

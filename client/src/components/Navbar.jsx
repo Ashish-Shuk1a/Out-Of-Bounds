@@ -19,7 +19,7 @@ const Navbar = ({ isTopOfpage }) => {
     setUserId(""); // Clear the userId in the component state
   };
 
-  const user=false
+  const user = false;
   // Initialize the userId from localStorage on component mount
   useEffect(() => {
     getUserIdFromLocalStorage();
@@ -27,9 +27,7 @@ const Navbar = ({ isTopOfpage }) => {
   // console.log(user?.email)
   const [sidebar, setSidebar] = useState(false);
   return (
-    <div
-      className="sticky top-0 left-0  z-50 rounded-2xl  height-40 font-semibold "
-    >
+    <div className="sticky top-0 left-0  z-50 rounded-2xl  height-40 font-semibold ">
       <div
         className={`${
           isTopOfpage
@@ -57,7 +55,7 @@ const Navbar = ({ isTopOfpage }) => {
                   <Link to="/">Home</Link>
                 </button>
                 <button className=" hover:scale-105  mx-3 ">
-                  <Link to="/postjob">Post a Job</Link>
+                  <Link to="/createevent">Create Event</Link>
                 </button>
                 <button className=" hover:scale-105  mx-3 ">
                   <Link to="/search">Search</Link>

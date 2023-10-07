@@ -26,11 +26,11 @@ function FormPersonalDetails({ step, setStep, user, setUser }) {
   };
 
   const socialWellnessEventTypes = [
-    { value: "charity", label: "Charity Event" },
-    { value: "community_service", label: "Community Service" },
-    { value: "yoga_workshop", label: "Yoga Workshop" },
-    { value: "meditation_session", label: "Meditation Session" },
-    { value: "self_care_workshop", label: "Self-Care Workshop" },
+    { value: "Animals", label: "Animals" },
+    { value: "Criminal Justice", label: "Criminal Justice" },
+    { value: "Disability", label: "Disability" },
+    { value: "Education", label: "Education" },
+    { value: "Health", label: "Health" },
     // Add more event types as needed
   ];
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -83,7 +83,6 @@ function FormPersonalDetails({ step, setStep, user, setUser }) {
         .catch((error) => {
           console.log(error);
         });
-
     } catch (error) {
       console.log(error.message);
       alert("Google sign in failed. Please try again later.");

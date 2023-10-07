@@ -2,9 +2,8 @@ import React from "react";
 import { useState } from "react";
 import About from "./InsideEvent/About";
 // import Events from "./InsideEvent/Events";
-// import Calendar from "./InsideEvent/Calendar";
+import Calender from "../Calender/Calender";
 
-import CalendarComponent from "./../Map/CalendarComponent";
 import CounterContainer from "../Hero/CounterContainer";
 import Tilt from "react-parallax-tilt";
 import Description from "./InsideEvent/About_card/Description";
@@ -201,7 +200,7 @@ const CheckEvent = () => {
       </div>
       {activeStatus == 1 && <About />}
       {activeStatus == 2 && <Description />}
-      {activeStatus == 3 && <CalendarComponent />}
+      {activeStatus == 3 && <Calender />}
       {/* {activeStatus == 4 && <Discussion />} */}
     </>
   );

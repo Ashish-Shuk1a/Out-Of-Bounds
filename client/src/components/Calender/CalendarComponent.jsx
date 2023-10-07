@@ -1,35 +1,32 @@
-import React from 'react';
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 //for Date and Time Format library used instead of MomentJs
 import dayjs from "dayjs";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 
 function CalendarComponent() {
-
   const events = [
     {
-      title: 'Event 1 Summary',
-      start: '2023-06-15T10:00:00',
-      end: '2023-06-15T12:00:00'
+      title: "Discussion",
+      start: "2023-06-15T10:00:00",
+      end: "2023-06-15T12:00:00",
     },
     {
-      title: 'Event 2 Summary',
-      start: '2023-06-16T14:00:00',
-      end: '2023-06-16T16:00:00'
+      title: "",
+      start: "2023-06-16T14:00:00",
+      end: "2023-06-16T16:00:00",
     },
     {
-      title: 'Event 3 Summary',
-      start: '2023-06-14T09:00:00',
-      end: '2023-08-14T11:00:00'
+      title: "Event 3 Summary",
+      start: "2023-06-14T09:00:00",
+      end: "2023-08-14T11:00:00",
     },
   ];
-
-  
 
   return (
     <div>
@@ -50,18 +47,18 @@ function CalendarComponent() {
           end: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         selectable={true}
-        customButtons={{
-          new: {
-            text: "Sync with Google",
-            click: () => {
-              events.push(  {
-                title: 'Event 4 Summary',
-                start: '2023-11-15T10:00:00',
-                end: '2023-11-15T12:00:00'
-              })
-            },
-          },
-        }}
+        // customButtons={{
+        //   new: {
+        //     text: "Sync with Google",
+        //     click: () => {
+        //       events.push({
+        //         title: "Event 4 Summary",
+        //         start: "2023-11-15T10:00:00",
+        //         end: "2023-11-15T12:00:00",
+        //       });
+        //     },
+        //   },
+        // }}
         events={events}
         eventColor="Green"
         nowIndicator
@@ -87,4 +84,4 @@ function CalendarComponent() {
   );
 }
 
-export default CalendarComponent
+export default CalendarComponent;

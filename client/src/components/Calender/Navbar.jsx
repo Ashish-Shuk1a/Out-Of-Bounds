@@ -11,13 +11,13 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
 
-  useEffect(() => {
-    initClient((success) => {
-      if (success) {
-        getGoogleAuthorizedEmail();
-      }
-    });
-  }, []);
+    // useEffect(() => {
+    //   initClient((success) => {
+    //     if (success) {
+    //       getGoogleAuthorizedEmail();
+    //     }
+    //   });
+    // }, []);
 
   const getGoogleAuthorizedEmail = async () => {
     let email = await getSignedInUserEmail();
