@@ -35,7 +35,7 @@ const Card = () => {
           sint. Velit officia consequat duis enim velit mollit.
         </p>
         <a
-          href="#"
+          href="/check-events"
           title=""
           class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
         >
