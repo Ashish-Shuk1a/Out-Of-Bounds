@@ -3,10 +3,10 @@ import getRemainingTime from '../../utils/countDownTimer'
 import CounterAtom from "./CounterAtom";
 const CounterContainer = ({ countDownLimit }) => {
     const defaultRemainingTime = {
-        days: '00',
-        hours: '00',
-        minutes: '00',
-        seconds: '00',
+        days: '01',
+        hours: '10',
+        minutes: '30',
+        seconds: '05',
     }
     const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
     const updateRemainingTime = (countdown) => {
@@ -20,7 +20,7 @@ const CounterContainer = ({ countDownLimit }) => {
         return () => clearInterval(timer)
     }, [countDownLimit])
   return (
-    <div className="flex justify-center grow mt-12 lg:mt-0">
+    <div className="flex bg-gradient-to-b from-blue-500 to-white justify-center grow mt-20 lg:mt-0 bg-blue-400 h-40">
       <div className="flex items-center gap-12 lg:gap-8 lg:flex-row 2xl:gap-24">
         <CounterAtom time="Days" timeleft={remainingTime.days}/>
         <CounterAtom time="Hrs" timeleft={remainingTime.hours}/>

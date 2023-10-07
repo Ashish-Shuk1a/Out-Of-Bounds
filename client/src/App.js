@@ -7,7 +7,8 @@ import Hero from "./components/Hero/Hero";
 import Profile from "./components/Profile";
 import Event from "./components/Event/Event";
 import Footer from "./components/Footer/Footer";
-import CreateEvent from "./components/Event/CreateEvent";
+import CreateEvent from "./components/CreateEvent";
+import CheckEvent from "./components/Event/CheckEvent";
 
 function App() {
   const [isTopOfpage, setIsTopOfpage] = useState(true);
@@ -30,7 +31,7 @@ function App() {
         <Route path="/events" element={<Event />} />
         <Route path="/createevent" element={<CreateEvent />} />
 
-
+        <Route path="/check-events" element={<CheckEvent />} />
 
       </Routes>
       <Footer />

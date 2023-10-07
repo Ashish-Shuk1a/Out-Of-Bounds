@@ -1,20 +1,66 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 const Profile = () => {
   const [image, setimage] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const getUserIdFromLocalStorage = () => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  };
+
+  // Initialize the userId from localStorage on component mount
+  useEffect(() => {
+    getUserIdFromLocalStorage();
+
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `https://hackmania-hackathon.vercel.app/api/user/${userId}/profile`,
+      headers: {},
+    };
+
+    console.log(userId);
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data?.data));
+        setUser(response.data?.data);
+        const temp = response.data?.data;
+
+        setVal({
+          username: temp?.name,
+          about: temp?.about,
+          email: temp?.email,
+          region: temp?.location.region,
+          city: temp?.location.city,
+          country: temp?.location.country,
+          zip_code: temp?.location.zip_code,
+          state: temp?.location.state,
+        });
+        setIsChecked2(temp?.notification.on_email)
+        setIsChecked1(temp?.notification.on_num)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [userId]);
+
   const [val, setVal] = useState({
-    username: "",
+    username: user?.name,
     about: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    streetAddress: "",
-    city: " ",
-    country: "",
-    zip: 0,
-    state: "",
+    email: user?.email,
+    region: user?.region,
+    city: user?.city,
+    country: user?.country,
+    zip_code: 0,
+    state: user?.state,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +105,8 @@ const Profile = () => {
     // console.log("payload", payload);
     // Place your API call here to submit your payload.
   };
+  console.log(user?.name);
+  console.log(val.username);
   return (
     <form id="login" onSubmit={handleSubmit}>
       <div className="bg-white md:px-40 pl-10 ">
@@ -194,42 +242,6 @@ const Profile = () => {
             <div className="container grid grid-cols-2 mx-auto">
               <div className="px-6 col-span-1 flex flex-col mb-6">
                 <label
-                  htmlFor="FirstName"
-                  className="pb-2 text-sm font-bold text-gray-800 text-gry-100"
-                >
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="FirstName"
-                  name="firstName"
-                  onChange={handleChange}
-                  value={val.firstName}
-                  required
-                  className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
-                  placeholder
-                />
-              </div>
-              <div className="px-6 col-span-1 flex flex-col mb-6">
-                <label
-                  htmlFor="LastName"
-                  className="pb-2 text-sm font-bold text-gray-800 text-gray-100"
-                >
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="LastName"
-                  name="lastName"
-                  onChange={handleChange}
-                  value={val.lastName}
-                  required
-                  className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
-                  placeholder
-                />
-              </div>
-              <div className="px-6 col-span-1 flex flex-col mb-6">
-                <label
                   htmlFor="Email"
                   className="pb-2 text-sm font-bold text-gray-800 text-gray-100"
                 >
@@ -244,7 +256,7 @@ const Profile = () => {
                       height={20}
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
-                      stroke="currentColor"
+                      stroke="black"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -265,7 +277,7 @@ const Profile = () => {
                     placeholder="example@gmail.com"
                   />
                 </div>
-                <div className="flex justify-between px-6 col-span-1 items-center pt-1 text-green-400">
+                {/* <div className="flex justify-between px-6 col-span-1 items-center pt-1 text-green-400">
                   <p className="text-xs">Email submission success!</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -284,21 +296,21 @@ const Profile = () => {
                       fill="currentColor"
                     />
                   </svg>
-                </div>
+                </div> */}
               </div>
               <div className="px-6 col-span-1 flex flex-col mb-6">
                 <label
-                  htmlFor="StreetAddress"
+                  htmlFor="region"
                   className="pb-2 text-sm font-bold text-gray-800 text-gay-100"
                 >
-                  Street Address
+                  Region
                 </label>
                 <input
                   type="text"
-                  id="StreetAddress"
-                  name="streetAddress"
+                  id="region"
+                  name="region"
                   onChange={handleChange}
-                  value={val.streetAddress}
+                  value={val.region}
                   required
                   className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm rounded bg-transparent text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder
@@ -417,15 +429,15 @@ const Profile = () => {
                 </div>
                 <input
                   type="text"
-                  name="zip"
+                  name="zip_code"
                   required
                   onChange={handleChange}
-                  value={val.zip}
+                  value={val.zip_code}
                   id="ZIP"
                   className="bg-transparent border border-red-400 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder={86745}
                 />
-                <div className="flex justify-between items-center pt-1 text-red-400">
+                {/* <div className="flex justify-between items-center pt-1 text-red-400">
                   <p className="text-xs">Incorrect Zip Code</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -443,7 +455,7 @@ const Profile = () => {
                     <line x1={15} y1={9} x2={9} y2={15} />
                     <line x1={9} y1={9} x2={15} y2={15} />
                   </svg>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -479,26 +491,26 @@ const Profile = () => {
                 <rect x={3} y={5} width={18} height={14} rx={2} />
                 <polyline points="3 7 12 13 21 7" />
               </svg>
-              <p className="text-sm font-bold ml-2 text-gray-800 text-gray-100">
+              {/* <p className="text-sm font-bold ml-2 text-gray-800 text-gray-100">
                 Via Email
-              </p>
+              </p> */}
             </div>
             <div className="px-8">
               <div className="flex justify-between items-center mb-8 mt-4">
                 <div className="w-9/12">
                   <p className="text-sm text-gray-800 text-gray-100 pb-1">
-                    Comments
+                    Mobile
                   </p>
                   <p className="text-sm text-gray-500 text-gray-400">
-                    Get notified when a post or comment is made
+                    Get notified when a post or comment is made via SMS
                   </p>
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
-                  <label class="relative inline-flex items-center cursor-pointer">
+                  <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
                       value={!isChecked}
-                      class="sr-only peer"
+                      className="sr-only peer"
                       name="tog1"
                       checked={isChecked}
                       onChange={handleToggle}
@@ -509,20 +521,20 @@ const Profile = () => {
               </div>
               <div className="flex justify-between items-center mb-8">
                 <div className="w-9/12">
-                  <p className="text-sm text-gray-800 text-gray-100 pb-1">
-                    Job Applications
+                <p className="text-sm text-gray-800 text-gray-100 pb-1">
+                    Email
                   </p>
                   <p className="text-sm text-gray-500 text-gray-400">
-                    Get notified when a candidate applies to a job posting
+                    Get notified when a post or comment is made via Email
                   </p>
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
-                  <label class="relative inline-flex items-center cursor-pointer">
+                  <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
                       value={!isChecked1}
                       name="tog2"
-                      class="sr-only peer"
+                      className="sr-only peer"
                       checked={isChecked1}
                       onChange={handleToggle1}
                     />
@@ -541,12 +553,12 @@ const Profile = () => {
                   </p>
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
-                  <label class="relative inline-flex items-center cursor-pointer">
+                  <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
                       value={!isChecked2}
                       name="tog3"
-                      class="sr-only peer"
+                      className="sr-only peer"
                       checked={isChecked2}
                       onChange={handleToggle2}
                     />

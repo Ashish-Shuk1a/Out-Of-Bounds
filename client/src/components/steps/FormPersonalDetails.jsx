@@ -43,8 +43,8 @@ function FormPersonalDetails({ step, setStep, user, setUser }) {
     );
     console.log(selectedValues[0].value);
   };
-  const saveUserIdToLocalStorage = () => {
-    // localStorage.setItem('userId', userId);
+  const saveUserIdToLocalStorage = (userId) => {
+    localStorage.setItem("userId", userId);
   };
 
   const animatedComponents = makeAnimated();
@@ -53,6 +53,7 @@ function FormPersonalDetails({ step, setStep, user, setUser }) {
     try {
       setUser((prev) => ({
         ...prev,
+        email: null,
         name: name,
         location: val,
         area_of_interest: selectedOptions,
@@ -75,12 +76,14 @@ function FormPersonalDetails({ step, setStep, user, setUser }) {
         .request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
+          console.log("otp", response.data.data._id);
+          saveUserIdToLocalStorage(response.data.data._id);
+          setStep(3);
         })
         .catch((error) => {
           console.log(error);
         });
 
-      // setStep(3);
     } catch (error) {
       console.log(error.message);
       alert("Google sign in failed. Please try again later.");

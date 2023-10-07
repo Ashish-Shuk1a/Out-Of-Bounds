@@ -9,6 +9,7 @@ import Computer from "../../images/shapes/computerWhite.png";
 import Tilt from "react-parallax-tilt";
 import Typewriter from "typewriter-effect";
 import Event from "../Event/Event";
+import Faqu from "../Faq";
 const Hero = () => {
   return (
     <section
@@ -77,10 +78,9 @@ const Hero = () => {
             <img src={Computer} />
           </div>
         </div>
-
       </div>
       <Event />
-      
+      <Faqu />
     </section>
   );
 };

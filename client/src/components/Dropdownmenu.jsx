@@ -66,7 +66,7 @@ function Dropdownmenu() {
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory("Mockups")}
+                onClick={() => selectCategory("1 mil")}
                 className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-ray-600 dark:hover:text-whte"
               >
                 1 mil
@@ -75,7 +75,7 @@ function Dropdownmenu() {
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory("Templates")}
+                onClick={() => selectCategory("5 mil")}
                 className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gra-600 dark:hover:text-whie"
               >
                 5 mil
@@ -84,7 +84,7 @@ function Dropdownmenu() {
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory("Design")}
+                onClick={() => selectCategory("10 mil")}
                 className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gry-600 dark:hover:text-wite"
               >
                 10 mil
@@ -93,7 +93,7 @@ function Dropdownmenu() {
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory("Logos")}
+                onClick={() => selectCategory("15 mil")}
                 className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gry-600 dark:hover:text-whie"
               >
                 15 mil
@@ -106,8 +106,8 @@ function Dropdownmenu() {
             type="search"
             id="search-dropdown"
             ref={inputRef}
-            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gra-700 dark:border-lgray-700  dark:border-gra-600 dark:placeholder-gry-400 dark:text-whie dark:focus:border-blue-500"
-            placeholder="Search Mockups, Logos, Design Templates..."
+            className="block p-2.5 w-full z-20 text-sm text-gray-900 md:w-[300px] bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gra-700 dark:border-lgray-700  dark:border-gra-600 dark:placeholder-gry-400 dark:text-whie dark:focus:border-blue-500"
+            placeholder="Search Events, Destinations..."
             required
           />
           <button
@@ -124,9 +124,9 @@ function Dropdownmenu() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>

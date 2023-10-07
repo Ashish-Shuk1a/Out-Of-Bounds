@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -7,13 +7,28 @@ import logoimageblack from "./Hirecruitblack.png";
 import Dropdownmenu from "./Dropdownmenu";
 
 const Navbar = ({ isTopOfpage }) => {
+  const [userId, setUserId] = useState(null);
+  const getUserIdFromLocalStorage = () => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  };
+  const deleteUserIdFromLocalStorage = () => {
+    localStorage.removeItem("userId");
+    setUserId(""); // Clear the userId in the component state
+  };
+
+  const user=false
+  // Initialize the userId from localStorage on component mount
+  useEffect(() => {
+    getUserIdFromLocalStorage();
+  }, [user]);
   // console.log(user?.email)
   const [sidebar, setSidebar] = useState(false);
-  const user = {};
   return (
     <div
-      className="sticky top-0 left-0  z-50 rounded-2xl  
-    height-40 font-semibold "
+      className="sticky top-0 left-0  z-50 rounded-2xl  height-40 font-semibold "
     >
       <div
         className={`${
@@ -35,7 +50,7 @@ const Navbar = ({ isTopOfpage }) => {
             </h1>
           </div>
           <Dropdownmenu />
-          {user?.email ? (
+          {userId ? (
             <div>
               <div className="hidden md:block">
                 <button className=" hover:scale-105  mx-3 ">
@@ -48,10 +63,10 @@ const Navbar = ({ isTopOfpage }) => {
                   <Link to="/search">Search</Link>
                 </button>
                 <button className=" font-bold mx-1 mr-2 p-1 hover:scale-105">
-                  <Link to="/profile">{/* {user.displayName} */}</Link>
+                  <Link to="/profile">Profile</Link>
                 </button>
                 <button
-                  onClick={() => {}}
+                  onClick={deleteUserIdFromLocalStorage}
                   className="navbutton p-2 rounded-xl"
                   // className='text-white bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold mx-1 p-2 rounded-3xl px-3 hover:scale-105 '
                 >
