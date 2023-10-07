@@ -22,6 +22,9 @@ const PetitionSchema = new Schema({
         },
         country:{
             type:String
+        },
+        zip_code:{
+            type:String
         }
     },
     topic:{

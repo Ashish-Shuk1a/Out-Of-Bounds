@@ -12,12 +12,13 @@ const UserSchema = new Schema({
         maxLength: 10,
         required: true,
         trim: true,
-        unique: true
+        // unique: true
+    },
+    about:{
+        type:String
     },
     email: {
         type: String,
-        trim: true,
-        unique: true
     },
     location:{
         region:{
@@ -30,6 +31,9 @@ const UserSchema = new Schema({
             type:String
         },
         country:{
+            type:String
+        },
+        zip_code:{
             type:String
         }
     },
@@ -69,7 +73,17 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Petition'
         }
-    }]
+    }],
+    notifications:{
+        on_num:{
+            type:Boolean,
+            default:true
+        },
+        on_email:{
+            type:Boolean,
+            default:true
+        }
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', UserSchema)
