@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 function Dropdownmenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('All categories');
+  const [selectedCategory, setSelectedCategory] = useState("All categories");
   const inputRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -21,22 +21,24 @@ function Dropdownmenu() {
 
   return (
     <form>
-      <div className="flex">
+      <div className="flex light">
         <label
           htmlFor="search-dropdown"
-          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+          className="mb-2 text-sm font-medium text-gray-900 sr-only "
         >
           Your Email
         </label>
         <button
           id="dropdown-button"
           onClick={toggleDropdown}
-          className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+          className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100  dark:text-whie "
           type="button"
         >
-          {selectedCategory}{' '}
+          {selectedCategory}{" "}
           <svg
-            className={`w-2.5 h-2.5 ml-2.5 ${isDropdownOpen ? 'transform rotate-180' : ''}`}
+            className={`w-2.5 h-2.5 ml-2.5 ${
+              isDropdownOpen ? "transform rotate-180" : ""
+            }`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -53,43 +55,48 @@ function Dropdownmenu() {
         </button>
         <div
           id="dropdown"
-          className={`z-10 ${isDropdownOpen ? 'block' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+          className={`z-10 ${
+            isDropdownOpen ? "block" : "hidden"
+          } bg-white divide-y absolute divide-gray-100 rounded-lg shadow w-44 dark:bg-gr0`}
         >
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+          <ul
+            className="py-2 text-sm text-gray-700 dark:text-gry-200"
+            aria-labelledby="dropdown-button"
+          >
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory('Mockups')}
-                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => selectCategory("Mockups")}
+                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-ray-600 dark:hover:text-whte"
               >
-                Mockups
+                1 mil
               </button>
             </li>
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory('Templates')}
-                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => selectCategory("Templates")}
+                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gra-600 dark:hover:text-whie"
               >
-                Templates
+                5 mil
               </button>
             </li>
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory('Design')}
-                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => selectCategory("Design")}
+                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gry-600 dark:hover:text-wite"
               >
-                Design
+                10 mil
               </button>
             </li>
             <li>
               <button
                 type="button"
-                onClick={() => selectCategory('Logos')}
-                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => selectCategory("Logos")}
+                className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gry-600 dark:hover:text-whie"
               >
-                Logos
+                15 mil
               </button>
             </li>
           </ul>
@@ -99,7 +106,7 @@ function Dropdownmenu() {
             type="search"
             id="search-dropdown"
             ref={inputRef}
-            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gra-700 dark:border-lgray-700  dark:border-gra-600 dark:placeholder-gry-400 dark:text-whie dark:focus:border-blue-500"
             placeholder="Search Mockups, Logos, Design Templates..."
             required
           />

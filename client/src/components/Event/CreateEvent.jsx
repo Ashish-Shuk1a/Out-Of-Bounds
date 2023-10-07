@@ -1,51 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-const Profile = () => {
+import React, { useRef, useState } from "react";
+const CreateEvent = () => {
   const [image, setimage] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [val, setVal] = useState({
-    username: "",
-    about: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    streetAddress: "",
-    city: " ",
-    country: "",
-    zip: 0,
-    state: "",
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setVal((prevVal) => ({
-      ...prevVal,
-      [name]: value,
-    }));
-    console.log(val);
-  };
-
-  const handleToggle = (e) => {
-    setIsChecked((prev) => !prev);
-    console.log(e.target.name);
-    console.log(e.target.value);
-  };
-  const handleToggle1 = (e) => {
-    setIsChecked1((prev) => !prev);
-    console.log(e.target.name);
-    console.log(e.target.value);
-  };
-  const handleToggle2 = (e) => {
-    setIsChecked2((prev) => !prev);
-    console.log(e.target.name);
-    console.log(e.target.value);
-  };
-
-  useEffect(() => {
-    setIsChecked(false);
-    setIsChecked1(false);
-    setIsChecked2(false);
-  }, []);
 
   let form = useRef(null);
   const handleSubmit = (event) => {
@@ -55,7 +10,6 @@ const Profile = () => {
     form_data.forEach(function (value, key) {
       payload[key] = value;
     });
-
     // console.log("payload", payload);
     // Place your API call here to submit your payload.
   };
@@ -136,8 +90,6 @@ const Profile = () => {
                   type="text"
                   id="username"
                   name="username"
-                  onChange={handleChange}
-                  value={val.username}
                   required
                   className="border border-gray-300 border-gray-00 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 bg-transparent placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder="@example"
@@ -153,8 +105,6 @@ const Profile = () => {
                 <textarea
                   id="about"
                   name="about"
-                  onChange={handleChange}
-                  value={val.about}
                   required
                   className="bg-transparent border border-gray-300 border-gry-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder="Let the world know who you are"
@@ -203,8 +153,6 @@ const Profile = () => {
                   type="text"
                   id="FirstName"
                   name="firstName"
-                  onChange={handleChange}
-                  value={val.firstName}
                   required
                   className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder
@@ -221,8 +169,6 @@ const Profile = () => {
                   type="text"
                   id="LastName"
                   name="lastName"
-                  onChange={handleChange}
-                  value={val.lastName}
                   required
                   className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder
@@ -258,8 +204,6 @@ const Profile = () => {
                     type="text"
                     id="Email"
                     name="email"
-                    onChange={handleChange}
-                    value={val.email}
                     required
                     className="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-500 text-gray-400"
                     placeholder="example@gmail.com"
@@ -289,7 +233,7 @@ const Profile = () => {
               <div className="px-6 col-span-1 flex flex-col mb-6">
                 <label
                   htmlFor="StreetAddress"
-                  className="pb-2 text-sm font-bold text-gray-800 text-gay-100"
+                  className="pb-2 text-sm font-bold text-gray-800 text-gray-100"
                 >
                   Street Address
                 </label>
@@ -297,8 +241,6 @@ const Profile = () => {
                   type="text"
                   id="StreetAddress"
                   name="streetAddress"
-                  onChange={handleChange}
-                  value={val.streetAddress}
                   required
                   className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm rounded bg-transparent text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder
@@ -316,8 +258,6 @@ const Profile = () => {
                     type="text"
                     id="City"
                     name="city"
-                    onChange={handleChange}
-                    value={val.city}
                     required
                     className="pl-3 py-3 w-full text-sm focus:outline-none border border-transparent focus:border-indigo-700 bg-transparent rounded placeholder-gray-500 text-gray-500 text-gray-400"
                     placeholder="Los Angeles"
@@ -367,8 +307,6 @@ const Profile = () => {
                   type="text"
                   id="State/Province"
                   name="state"
-                  onChange={handleChange}
-                  value={val.state}
                   required
                   className="border border-gray-300 border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder="California"
@@ -385,8 +323,6 @@ const Profile = () => {
                   type="text"
                   id="Country"
                   name="country"
-                  onChange={handleChange}
-                  value={val.country}
                   required
                   className="border bg-transparent border-gray-300 border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder="United States"
@@ -419,8 +355,6 @@ const Profile = () => {
                   type="text"
                   name="zip"
                   required
-                  onChange={handleChange}
-                  value={val.zip}
                   id="ZIP"
                   className="bg-transparent border border-red-400 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 text-gray-400"
                   placeholder={86745}
@@ -453,6 +387,7 @@ const Profile = () => {
             <div className="flex items-center mx-auto">
               <div className="container mx-auto">
                 <div className="mx-auto xl:w-full">
+                  
                   <p className="text-sm text-gray-500 text-gray-400 pt-1">
                     Get updates of any new activity or features. Turn on/off
                     your preferences
@@ -495,14 +430,7 @@ const Profile = () => {
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
                   <label class="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      value={!isChecked}
-                      class="sr-only peer"
-                      name="tog1"
-                      checked={isChecked}
-                      onChange={handleToggle}
-                    />
+                    <input type="checkbox" value="" class="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                   </label>
                 </div>
@@ -518,14 +446,7 @@ const Profile = () => {
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
                   <label class="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      value={!isChecked1}
-                      name="tog2"
-                      class="sr-only peer"
-                      checked={isChecked1}
-                      onChange={handleToggle1}
-                    />
+                    <input type="checkbox" value="" class="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                   </label>
                 </div>
@@ -542,14 +463,7 @@ const Profile = () => {
                 </div>
                 <div className="cursor-pointer rounded-full bg-gray-200 relative shadow-sm">
                   <label class="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      value={!isChecked2}
-                      name="tog3"
-                      class="sr-only peer"
-                      checked={isChecked2}
-                      onChange={handleToggle2}
-                    />
+                    <input type="checkbox" value="" class="sr-only peer" />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                   </label>
                 </div>
@@ -582,4 +496,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default CreateEvent;

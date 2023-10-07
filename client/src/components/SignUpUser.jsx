@@ -5,12 +5,20 @@ import Success from "./steps/Success";
 
 const SignUpUser = () => {
   const [step, setStep] = useState(1);
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    number: "",
+    location: "",
+    area_of_interest: [],
+    prior_exp: [{}],
+  });
 
   switch (step) {
     case 1:
-      return <FormUserDetails step={step} setStep={setStep} />;
+      return <FormUserDetails user={user} setUser={setUser} step={step} setStep={setStep} />;
     case 2:
-      return <FormPersonalDetails step={step} setStep={setStep} />;
+      return <FormPersonalDetails user={user} setUser={setUser} step={step} setStep={setStep} />;
     case 3:
       return <Success />;
     default:

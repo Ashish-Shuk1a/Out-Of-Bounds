@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero/Hero";
 import Profile from "./components/Profile";
 import Event from "./components/Event/Event";
+import Footer from "./components/Footer/Footer";
+import CreateEvent from "./components/Event/CreateEvent";
 
 function App() {
   const [isTopOfpage, setIsTopOfpage] = useState(true);
@@ -26,9 +28,12 @@ function App() {
         <Route path="/" element={<Hero />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/events" element={<Event />} />
+        <Route path="/createevent" element={<CreateEvent />} />
+
 
 
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

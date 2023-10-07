@@ -34,7 +34,7 @@ const Navbar = ({ isTopOfpage }) => {
               </Link>
             </h1>
           </div>
-<Dropdownmenu/>
+          <Dropdownmenu />
           {user?.email ? (
             <div>
               <div className="hidden md:block">

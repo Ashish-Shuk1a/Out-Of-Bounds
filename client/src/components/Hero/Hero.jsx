@@ -80,6 +80,7 @@ const Hero = () => {
 
       </div>
       <Event />
+      
     </section>
   );
 };

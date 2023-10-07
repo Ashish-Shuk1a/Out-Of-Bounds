@@ -1,29 +1,75 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import {
-//   auth,
-//   signInWithEmailAndPassword,
-//   signInWithGoogle,
-// } from "../firebase-config";
-// import { useAuthState } from "react-firebase-hooks/auth";
+import axios from "axios";
 
-function FormUserDetails({ step, setStep }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState(false);
+function FormUserDetails({ step, setStep, setUser }) {
+  const [number, setNumber] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [otp, setOtp] = useState(null);
+  const [sendotp, setSendotp] = useState(false);
+  const [error, setError] = useState(null);
+
   // const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
   const handleSendOtp = async (e) => {
-    setOtp(true);
+    let data = { number: number };
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "https://hackmania-hackathon.vercel.app/api/otp",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(data),
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        console.log("otp", response.data[0].data.OTP);
+        setOtp(response.data[0].data.OTP);
+        console.log(otp);
+        setSendotp(true);
+        setUser((prev) => ({ ...prev, number:number }));
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // await signInWithEmailAndPassword(auth, email, password);
-      //   navigate("/explore");
-      setStep(2);
+      let data = JSON.stringify({
+        number: number,
+        otp: password,
+      });
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://hackmania-hackathon.vercel.app/api/otp/verify",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+          if (response.status === 200) {
+            setStep(2);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
       alert(error);
@@ -54,22 +100,22 @@ function FormUserDetails({ step, setStep }) {
       >
         <input
           type="number"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
           placeholder="Enter Mobile Number"
           className="m-1 p-1 text-black ring ring-offset-2  hover:ring-green-400 outline-none rounded-sm"
         />
-        {email && (
+        {number && (
           <div className="flex justify-center items-center">
             <button
               className="bg-green-500 w-fit rounded-xl p-3 m-3 text-white font-semibold"
               onClick={handleSendOtp}
             >
-              {!otp ? "Send Otp" : "Resend Otp"}
+              {!sendotp ? "Send Otp" : "Resend Otp"}
             </button>
           </div>
         )}
-        {otp && (
+        {sendotp && (
           <input
             type="number"
             className="m-1 mt-5 p-1 text-black ring ring-offset-2  hover:ring-green-400 outline-none rounded-sm"
@@ -78,6 +124,7 @@ function FormUserDetails({ step, setStep }) {
             placeholder="Enter Otp here..."
           />
         )}
+        {error && <div>{error}</div>}
         <div className="text-center justify-center">
           <button
             className="p-1 mt-6 m-1 font-semibold bg-blue-500 

@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "./Card";
-
+import Maqam from "../../images/shapes/MaqamWhite.png";
+import Atom from "../../images/shapes/atomWhite.png";
+import Globe from "../../images/shapes/globe.png";
 import Typewriter from "typewriter-effect";
 
 const Event = () => {
@@ -117,6 +119,15 @@ const Event = () => {
               />
             </svg>
           </button>
+        </div>
+        <div className="w-12 h-12 absolute top-1/4 left-4 lg:top-4 lg:left-4">
+          <img src={Atom} />
+        </div>
+        <div className="w-12 h-12 absolute top-12 left-[90%] lg:top-4 lg:left-1/4">
+          <img src={Globe} />
+        </div>
+        <div className="hidden lg:block w-16 h-16 absolute top-4 right-16">
+          <img src={Maqam} />
         </div>
       </div>
     </section>
