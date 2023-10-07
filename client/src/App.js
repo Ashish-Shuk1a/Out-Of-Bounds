@@ -9,6 +9,7 @@ import Event from "./components/Event/Event";
 import Footer from "./components/Footer/Footer";
 import CreateEvent from "./components/CreateEvent";
 import CheckEvent from "./components/Event/CheckEvent";
+import Trail from "./components/Trial";
 
 function App() {
   const [isTopOfpage, setIsTopOfpage] = useState(true);
@@ -32,6 +33,8 @@ function App() {
         <Route path="/createevent" element={<CreateEvent />} />
 
         <Route path="/check-events" element={<CheckEvent />} />
+        <Route path="/check-trial" element={<Trail />} />
+
 
       </Routes>
       <Footer />
