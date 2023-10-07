@@ -24,7 +24,7 @@ router.post('/admin/create/profile',createAdmin);
 //////////////////////// Event Management ////////////////////////
 const {createEvent,recommendEvent_Region,recommendEvent_City,
     recommendEvent_Country,recommendEvent_State,recommendEvent_Global,
-userEventParticipation,getAdminEvents,adminEventParticipants} =require("../controllers/EventController")
+userEventParticipation,getAdminEvents,adminEventParticipants,adminParticipantsApproval} =require("../controllers/EventController")
 
 router.post('/admin/:id/event/create',createEvent);
 
@@ -37,6 +37,8 @@ router.get('/user/:id/event/recommend/global',recommendEvent_Global);
 router.post('/user/:id/event/participate',userEventParticipation);
 router.get('/admin/:id/events',getAdminEvents);
 router.post('/admin/:id/event/participants',adminEventParticipants);
+
+router.post('/admin/:id/event/participants/approve',adminParticipantsApproval);
 //////////////////////////////////////////////////////////////////
 
 //////////////////////// Petition Management ////////////////////////
@@ -59,7 +61,7 @@ router.get('/user/:id/petition/recommend/global',recommendPetition_Global);
 
 
 //////////////////////// Changes Management ////////////////////////
-const {editLocation,addEventScope,addAbout,addZipCode,changeEvent} = require("../controllers/changesController")
+const {editLocation,addEventScope,addAbout,addZipCode,changeEvent,changeInterest} = require("../controllers/changesController")
 
 router.put('/edit/location',editLocation);
 
@@ -67,6 +69,7 @@ router.put('/add/event/scope',addEventScope);
 router.put('/add/about',addAbout);
 router.put('/add/zip_code',addZipCode);
 router.put('/change/event',changeEvent);
+router.put('/change/interest',changeInterest);
 
 
 module.exports = router;

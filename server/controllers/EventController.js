@@ -1,6 +1,7 @@
 const Event = require("../models/eventModel")
 const User = require("../models/userModel")
 const EventParticipants = require("../models/eventParticipantsModel")
+const {sendMail} = require("../controllers/notificationController")
 
 const createEvent = async (req, res) => {
     const admin_id = req.params.id
@@ -227,7 +228,14 @@ const userEventParticipation = async (req, res) => {
                 await eventParticipant.save();
                 event.curr_volunteers += 1
                 await event.save()
-
+                try{
+                    await sendMail("swatimehta744@gmail.com","Event Joined","You have successfully joined the event")
+                }catch(error){
+                    return res.status(400).json({
+                        "status": "error",
+                        "error": error.message
+                    })
+                }
                 return res.status(200).json({
                     "status": "success",
                     "message": "Event joined successfully",
@@ -242,6 +250,14 @@ const userEventParticipation = async (req, res) => {
                     status: "pending"
                 })
                 await eventParticipant.save();
+                try{
+                    await sendMail("swatimehta744@gmail.com","Event Joining Request","Your request to join the event has been sent to the admin")
+                }catch(error){
+                    return res.status(400).json({
+                        "status": "error",
+                        "error": error.message
+                    })
+                }
 
                 return res.status(200).json({
                     "status": "success",
@@ -277,6 +293,14 @@ const userEventParticipation = async (req, res) => {
                     response: resp
                 })
                 await eventParticipant.save();
+                try{
+                    await sendMail("swatimehta744@gmail.com","Event Joining Request","Your request to join the event has been sent to the admin")
+                }catch(error){
+                    return res.status(400).json({
+                        "status": "error",
+                        "error": error.message
+                    })
+                }
 
                 return res.status(200).json({
                     "status": "success",
@@ -332,6 +356,14 @@ const adminParticipantsApproval = async (req, res) => {
                 const participants = await EventParticipants.find({ admin_id: adminId, event_id: eventId, participant_id: userId })
                 participants.status = "rejected"
                 await participants.save()
+                try{
+                    await sendMail("swatimehta744@gmail.com","Event joining rejection","Your request to join the event has been rejected")
+                }catch(error){
+                    return res.status(400).json({
+                        "status": "error",
+                        "error": error.message
+                    })
+                }
                 return res.status(200).json({
                     "status": "success",
                     "message": "Participant rejected successfully",
@@ -343,6 +375,15 @@ const adminParticipantsApproval = async (req, res) => {
             participants.status = "accepted"
             await participants.save()
             event.curr_volunteers += 1
+            await event.save()
+            try{
+                await sendMail("swatimehta744@gmail.com","Event Joining Approval","Your request to join the event has been accepted")
+            }catch(error){
+                return res.status(400).json({
+                    "status": "error",
+                    "error": error.message
+                })
+            }
             return res.status(200).json({
                 "status": "success",
                 "message": "Participant acccepted successfully",
@@ -372,5 +413,6 @@ module.exports = {
     recommendEvent_Global,
     userEventParticipation,
     getAdminEvents,
-    adminEventParticipants
+    adminEventParticipants,
+    adminParticipantsApproval
 }

@@ -2,7 +2,9 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const axios = require("axios");
 const otpGenerator = require('otp-generator');
-const  Otp  = require('../models/otpModel');
+const Otp = require('../models/otpModel');
+const twilio = require('twilio');
+require('dotenv').config();
 
 //Random otp generation
 function generateOTP(length) {
@@ -14,24 +16,24 @@ function generateOTP(length) {
     return otp;
 }
 
+
+
 //Sending otp
 const getOTP = async (req, res) => {
     const number = req.body.number;
     let OTP = generateOTP(6);
-    
-    // const url = `https://www.fast2sms.com/dev/bulkV2?authorization=DMbg5uWa9w68NYJKeP1EqQBXkcpOCzvhH47ysRn0VtUxAf3Fio1HuZiC0qph4Fr65VSwjkIPcM27XLnt&route=dlt&sender_id=BURATA&message=156711&variables_values=${OTP}%7C%7C&flash=0&numbers=${number}`;
+    const accountSid = process.env.ACCOUNT_SID;
+    const authToken = process.env.AUTH_TOKEN;
+
+    const client = new twilio(accountSid, authToken);
 
     try {
-        // axios.get(url)
-        //     .then(response => {
-        //         // Process the response data
-        //         const data = response.data;
-        //         // Perform any further operations with the response data
-        //     })
-        //     .catch(error => {
-        //         // Handle any errors that occur during the request
-        //         console.error('Error:', error);
-        //     });
+        client.messages.create({
+            body:`Your OTP is ${OTP}`,
+            to: `+918693077281`,
+            from: '+19377304007'
+        })
+        .then((message) => console.log(message.sid));
 
         const otp = new Otp({ number: number, otp: OTP });
         const salt = await bcrypt.genSalt(10)
